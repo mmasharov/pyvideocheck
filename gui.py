@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import scrolledtext
 from pymedia import video_check
+import sys
 
 def getffmpeg():
     filename = filedialog.askopenfilename()
@@ -13,10 +14,11 @@ def getvideodir():
 def do_check():
     dirname = txt1.get()
     ffmpeg = txt2.get()
-    #txtfield.insert(INSERT, dirname)
-    #txtfield.insert(INSERT, ffmpeg)
     video_check(ffmpeg, dirname)
     txtfield.insert(INSERT, 'All Done!')
+
+def redirector(inputStr):
+    txtfield.insert(INSERT, inputStr)
 
 window = Tk()
 window.title('Videofile parameters check')
@@ -37,4 +39,5 @@ btn2.grid(column=1, row=2)
 txtfield.grid(column=0, row=3, columnspan=2)
 btn3.grid(column=0, row=4, columnspan=2)
 
+sys.stdout.write = redirector
 window.mainloop()
